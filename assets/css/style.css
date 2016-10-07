@@ -1,0 +1,15 @@
+@font-face{
+	font-family: 'SourceSansPro-Semibold';
+	src: url('../fontsgoogle/SourceSansPro-Semibold.ttf') format('truetype');
+}
+
+/* jQuery Datatables CSS Custom*/
+input[type="search"]:focus {
+	background-color: #00FFFF;
+}
+/*
+body {
+        font-family: 'Source Sans Pro', sans-serif;
+        font-size: 14px;
+      }
+      */

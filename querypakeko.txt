@@ -1,0 +1,169 @@
+SELECT
+    LPAD(MAX(RIGHT (`sJne_cust_id`,3)) + 1, 4,'0') AS NCUSTNUM
+FROM
+    `crm`.`dbsysseting`;
+
+
+
+DELIMITER $$
+
+CREATE
+    /*[DEFINER = { user | CURRENT_USER }]*/
+    FUNCTION `crm`.`func_ncustid`()
+    RETURNS VARCHAR (10)
+    /*LANGUAGE SQL
+    | [NOT] DETERMINISTIC
+    | { CONTAINS SQL | NO SQL | READS SQL DATA | MODIFIES SQL DATA }
+    | SQL SECURITY { DEFINER | INVOKER }
+    | COMMENT 'string'*/
+    BEGIN
+	DECLARE sRes VARCHAR(10);
+	SELECT LPAD(MAX(RIGHT (`sJne_cust_id`,3)) + 1, 3,'0') INTO sRes
+	FROM
+	`crm`.`dbsysseting`;
+	RETURN CONCAT('TGR/C/',sRes);
+
+    END$$
+
+DELIMITER ;
+
+panggilnya SELECT func_ncustid()
+
+
+http://www.discoversdk.com/categories/gui
+
+http://www.dumetagency.com/layanan
+
+http://ozs.web.id/2014/03/menyimpan-value-form-checkbox-ke-mysql-dalam-satu-field/
+
+
+"SELECT sName_contact
+                FROM dbcontact
+                INNER JOIN dbopportunity
+                    ON dbcontact.iId_customer = dbopportunity.iId_customer
+                INNER JOIN crm.dbschedule 
+                    ON dbopportunity.pId_opportunity=dbschedule.iId_opportunity
+                WHERE pId_opportunity = $key";
+
+
+    <div class="control-group">
+                <label class="control-label">Date Meeting</label>
+                <div class="controls">
+                    <div class="form-group">
+                        <div class="input-group date">
+                            <div class="input-group-addon">
+                                <i class="fa fa-calendar"></i>
+                            </div>
+                            <input type="text" id="datepicker" name="meet" class="form-control pull-right" value="<?php echo $date;?>">
+                         </div> 
+                    </div>
+                </div>
+        </div>
+
+<?php
+$s=1;
+if($datacon->result()>0)
+{
+    foreach ($datacon->result() as $row) {
+?>              
+<input type="checkbox" class="minimal-red" id="person<?php echo $s++;?>" name="person<?php echo $s++;?>" value="<?php echo $row->pId_contact;?>"> <?php echo $row->sName_contact;?><br>
+<?php } ?>
+    <input type="text" name="jbx" value="<?php echo $s; ?>" size="1" readonly hidden>
+<?php 
+}
+else
+{
+    echo "Contact Is Empty";
+}
+?>
+
+
+<--Controller For Checkbox-->
+$n = $this->input->post('jbx');
+        $x="";
+        for($d=1; $d<$n; $d++)
+        {
+            $l = $this->input->post('person'.$d);
+            if(isset($l))
+            {
+                if($x)
+                {
+                    $x.= (",'$l'");
+                }
+                else
+                {
+                    $x.=""."'$l'"."";
+                }
+            }
+        }   
+        $data['sPerson']                = $x;
+
+
+$x="";
+        $b = $this->input->post('person');
+        foreach ($b as $select) {
+             if($x)
+                {
+                    $x.= (",'$select'");
+                }
+                else
+                {
+                    $x.=""."'$select'"."";
+                }
+        
+        }
+        $data['sPerson']                = $x;
+        $this->Meeting_model->input_meeting($data);
+
+
+
+$b = $this->input->post('person');
+        $d = 0;
+        foreach ($b as $select) {            
+            $c[$d++] = $select;
+        }
+        echo $c[0];
+
+Intinya foreach itu melopping array menjadi string secara cepat, karena jika dengan while
+butuh proses pendeklarasian array nya terlebih dahulu
+
+
+--Ini query sql untuk memberikan perintah kepada tabel yang telah diberi perintah sebelumnya--
+
+SELECT SUM(probability) AS sProb FROM 
+(   
+SELECT dforecast_amount, dbopportunity.iStatus,
+CASE dbopportunity.iStatus 
+WHEN 1 THEN dforecast_amount * 0.10
+WHEN 2 THEN dForecast_amount * 0.30
+WHEN 3 THEN dForecast_amount * 0.50
+WHEN 4 THEN dForecast_amount * 0.95
+WHEN 5 THEN dForecast_amount * 0.70
+END AS probability
+
+FROM dbopportunity
+INNER JOIN dbcustomer
+    ON dbopportunity.iId_customer = dbcustomer.pId_customer
+WHERE (dForecast_running BETWEEN '2016-09-01' AND '2016-09-30')AND(dbcustomer.iId_sales = 2)
+)B
+
+
+
+--Ini query sql untuk memberikan percabangan dengan Case--
+
+SELECT SUM(probability) AS sProb FROM 
+(   
+SELECT dforecast_amount, dbopportunity.iStatus,
+CASE dbopportunity.iStatus 
+WHEN 1 THEN dforecast_amount * 0.10
+WHEN 2 THEN dForecast_amount * 0.30
+WHEN 3 THEN dForecast_amount * 0.50
+WHEN 4 THEN dForecast_amount * 0.95
+WHEN 5 THEN dForecast_amount * 0.70
+END AS probability
+
+FROM dbopportunity
+INNER JOIN dbcustomer
+    ON dbopportunity.iId_customer = dbcustomer.pId_customer
+WHERE (dForecast_running BETWEEN '2016-09-01' AND '2016-09-30')AND(dbcustomer.iId_sales = 2)
+)B
